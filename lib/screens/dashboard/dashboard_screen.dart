@@ -1,0 +1,43 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../constants.dart';
+import '../responsive.dart';
+import 'components/dashboard_details.dart';
+import 'components/drivers_amount.dart';
+import '../common_components/header.dart';
+import 'components/orders_amount.dart';
+import 'dashboard_controller.dart';
+
+class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Get.put(DashboardController());
+    return SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(defaultPadding),
+        child: Column(
+
+          children: [
+            Header(
+              title: "لوحة التحكم",
+            ),
+            SizedBox(
+              height: defaultPadding,
+            ),
+            DriversAmount(title: 'عدد السّائقين', svgSrc: '', numOfDrivers: 50,),
+            SizedBox(
+              height: defaultPadding,
+            ),
+            DashboardDetails(),
+
+          ],
+        ),
+      ),
+    );
+  }
+}
