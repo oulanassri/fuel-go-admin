@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../native_service/get_storage.dart';
 import '../../routes/app_routes.dart';
 import '../constants.dart';
 
@@ -72,7 +73,11 @@ class SideMenu extends StatelessWidget {
             DrawerListTile(
               title: 'تسجيل خروج',
               svgSrc: 'assets/icons/menu_notification.svg',
-              press: () {},
+              press: () {
+                UserStorage.delete('token');
+
+                Get.offNamed(Routes.LOGIN);
+              },
             ),
           ],
         ),
@@ -143,7 +148,6 @@ class DrawerMultiListTile extends StatelessWidget {
           title: 'الطلبات قيد التّنفيذ',
           svgSrc: 'assets/icons/menu_notification.svg',
           press: () {
-
             Get.toNamed(Routes.ORDERS_INPROGRESS_SCREEN);
           },
         ),
@@ -151,7 +155,6 @@ class DrawerMultiListTile extends StatelessWidget {
           title: 'الطلبات المكتملة',
           svgSrc: 'assets/icons/menu_notification.svg',
           press: () {
-
             Get.toNamed(Routes.ORDERS_COMPLETED_SCREEN);
           },
         ),
@@ -159,7 +162,6 @@ class DrawerMultiListTile extends StatelessWidget {
           title: 'الطلبات الملغاة',
           svgSrc: 'assets/icons/menu_notification.svg',
           press: () {
-
             Get.toNamed(Routes.ORDERS_CANCELLED_SCREEN);
           },
         ),

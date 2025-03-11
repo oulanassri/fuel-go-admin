@@ -2,7 +2,6 @@ import 'package:admin_fuel_go/screens/drivers_management/driver_details_screen.d
 import 'package:admin_fuel_go/screens/orders/orders_upcoming.dart';
 import 'package:get/get.dart';
 
-import '../enums/order_type.dart';
 import '../getx_bindings/dashboard_binding.dart';
 import '../getx_bindings/drivers_binding.dart';
 import '../getx_bindings/login_binding.dart';

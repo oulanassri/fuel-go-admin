@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 import '../../common_components/header.dart';
 import '../../responsive.dart';
+import '../lorries_managment_controller.dart';
 import 'add_button.dart';
 import 'custom_Lorries_table.dart';
 
 class LorriesTable extends StatelessWidget {
-  const LorriesTable({Key? key}) : super(key: key);
-
+   LorriesTable({Key? key,required this.controller}) : super(key: key);
+  LorriesManagementController controller;
   @override
   Widget build(BuildContext context) {
 
@@ -36,7 +37,7 @@ class LorriesTable extends StatelessWidget {
                       SizedBox(
                         height: defaultPadding,
                       ),
-                      CustomLorriesTable(),
+                      CustomLorriesTable(controller: controller,),
 
 
                     ],

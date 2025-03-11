@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
+import '../../common_components/custom_edit_text_form_field.dart';
 import '../../constants.dart';
 import '../../common_components/header.dart';
 import '../lorries_managment_controller.dart';
@@ -64,6 +65,24 @@ class AddingLorryWidget extends StatelessWidget {
                                   hintText: "نوع الوقود",
                                   controller: controller.fuelTypeController,
                                 ),*/
+                                CustomTextFormField(
+                                  hintText: "السّعة الكاملة لتعبئة الشاحنة",
+                                  controller: controller.cargoTankFullCapacityController,
+                                ),
+                                CustomTextFormField(
+                                  hintText: "كمية التعبئة الحاليّة",
+                                  controller: controller.cargoTankCapacityController,
+                                ),
+
+                                CustomTextFormField(
+                                  hintText: "السّعة خزان وقود الشاحنة",
+                                  controller: controller.fuelTankFullCapacityController,
+                                ),
+                                CustomTextFormField(
+                                  hintText: "كمية وقود الشاحنة",
+                                  controller: controller.fuelTankCapacityfuelTypeController,
+                                ),
+
                                 Obx(
                                   () => Padding(
                                       padding: const EdgeInsets.all(
@@ -73,7 +92,7 @@ class AddingLorryWidget extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "اختر نوع الوقود",
+                                            "اختر نوع وقود خزان الشاحنة",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .titleSmall,
@@ -89,6 +108,44 @@ class AddingLorryWidget extends StatelessWidget {
                                               items: [
                                                 for (var value
                                                     in controller.fuelTypeList)
+                                                  DropdownMenuItem(
+                                                    value: value,
+                                                    child: Text(
+                                                      value,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyLarge, //updated
+                                                    ),
+                                                  ),
+                                              ]),
+                                        ],
+                                      )),
+                                ),
+                                Obx(
+                                      () => Padding(
+                                      padding: const EdgeInsets.all(
+                                          defaultPadding / 2),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "اختر نوع وقود خزان الشاحنة",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall,
+                                          ),
+                                          DropdownButton<String>(
+                                            // updated
+                                              onChanged: (String? newValue) {
+                                                controller.setSelectedFuelType(
+                                                    newValue ?? '');
+                                              },
+                                              value: controller.selectedFuelType
+                                                  .value, //updated
+                                              items: [
+                                                for (var value
+                                                in controller.fuelTypeList)
                                                   DropdownMenuItem(
                                                     value: value,
                                                     child: Text(
@@ -122,7 +179,9 @@ class AddingLorryWidget extends StatelessWidget {
                                       child: CustomMaterialButton(
                                         route: "Routes.MAIN_SCREEN",
                                         text: "إضافة",
-                                        function: () {},
+                                        function: () {
+                                          controller.addTruck();
+                                        },
                                       ),
                                     )
                                   ],

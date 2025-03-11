@@ -4,19 +4,34 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../models/driver_model.dart';
+import '../../../models/drivers.dart';
 import '../../../models/recent_file.dart';
 import '../../../routes/app_routes.dart';
 import '../../constants.dart';
 import '../driver_details_screen.dart';
+import '../drivers_management_controller.dart';
 
 class CustomDriversTable extends StatelessWidget {
-  const CustomDriversTable({
-    super.key,
+  DriversManagementController controller;
+   CustomDriversTable({
+    super.key,required this.controller
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Obx(() => controller.isUploading.value
+        ? Container(height: double.infinity,
+      decoration: BoxDecoration(
+        gradient: gradientColorBg,
+      ),
+      //   height: double.infinity,
+      child: Center(
+        child: CircularProgressIndicator(
+          color: primaryColor,
+        ),
+      ),
+    )
+        : Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
         color: bgColor,
@@ -34,13 +49,13 @@ class CustomDriversTable extends StatelessWidget {
               columns: [
                 DataColumn(
                   label: Text(
-                    "رقم السّائق",
+                    "اسم السّائق",
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
                 DataColumn(
                   label: Text(
-                    "الاسم",
+                    "رقم الهاتف",
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
@@ -48,52 +63,38 @@ class CustomDriversTable extends StatelessWidget {
                   label: Text("البريد الإلكتروني",
                     style: Theme.of(context).textTheme.titleLarge,),
                 ),
-                DataColumn(
-                  label: Text("الهاتف",
-                    style: Theme.of(context).textTheme.titleLarge,),
-                ),
-                DataColumn(
-                  label: Text("رقم الشّاحنة",
-                    style: Theme.of(context).textTheme.titleLarge,),
-                ),
+
               ],
               rows: List.generate(
-                driversList.length,
-                (index) => driverDataRow(driversList[index],context),
+                controller.drivers.length,
+                (index) => driverDataRow(controller.drivers[index],context),
               ),
             ),
           ),
         ],
       ),
-    );
+    ));
   }
 
-  DataRow driverDataRow(DriverModel driverModel,BuildContext context) {
+  DataRow driverDataRow(DriversModel driverModel,BuildContext context) {
     return DataRow(
       onLongPress: (){
         Get.toNamed(Routes.DRIVER_DETAILS);
       },
       cells: [
         DataCell(
-          Text(driverModel.id ?? "",
+          Text(driverModel.name ?? "",
             style:Theme.of(context).textTheme.bodyLarge,),
         ),
         DataCell(
-          Text(driverModel.name ?? "",
+          Text(driverModel.phone ?? "",
             style: Theme.of(context).textTheme.bodyLarge,),
         ),
         DataCell(
           Text(driverModel.email ?? "",
             style: Theme.of(context).textTheme.bodyLarge,),
         ),
-        DataCell(
-          Text(driverModel.phone ?? "",
-            style:Theme.of(context).textTheme.bodyLarge,),
-        ),
-        DataCell(
-          Text(driverModel.lorryNumber ?? "",
-            style: Theme.of(context).textTheme.bodyLarge,),
-        ),
+
       ],
     );
   }

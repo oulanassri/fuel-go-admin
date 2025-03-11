@@ -34,7 +34,7 @@ class LorryDetails extends StatelessWidget {
                   child: Column(
                     children: [
                       Header(
-                        title: 'تفاصيل السّائق',
+                        title: 'تفاصيل الشّاحنة',
                       ),
                       SizedBox(
                         height: defaultPadding,
@@ -67,10 +67,6 @@ class LorryDetails extends StatelessWidget {
                                 CustomEditTextFormField(
                                   hintText: "رقم اللوحة",
                                   controller: controller.plateNumberController,
-                                ),
-                                CustomEditTextFormField(
-                                  hintText: "نوع الوقود",
-                                  controller: controller.fuelTypeController,
                                 ),
 
 

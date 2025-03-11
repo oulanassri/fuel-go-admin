@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import '../../enums/order_type.dart';
 import '../common_components/side_menu.dart';
 import '../constants.dart';
 import '../responsive.dart';

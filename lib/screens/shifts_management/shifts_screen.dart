@@ -14,7 +14,7 @@ class ShiftsScreen extends GetView<ShiftsController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ShiftsController());
+    ShiftsController controller= Get.put(ShiftsController());
     return Container(
       decoration: BoxDecoration(gradient: gradientColorBg),
       child: Scaffold(

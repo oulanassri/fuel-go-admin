@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../models/service.dart';
-import '../../../models/shift.dart';
 import '../../../routes/app_routes.dart';
 import '../../common_components/custom_material_button.dart';
 import '../../common_components/header.dart';

@@ -1,8 +1,9 @@
 import 'package:admin_fuel_go/screens/shifts_management/shefts_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:admin_fuel_go/screens/shifts_management/components/add_button.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-import '../../../models/shift.dart';
+import '../../../models/shifts.dart';
 import '../../../routes/app_routes.dart';
 import '../../common_components/custom_material_button.dart';
 import '../../common_components/header.dart';
@@ -19,7 +20,19 @@ class CustomShiftsTable extends StatelessWidget {
     return SafeArea(
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(defaultPadding),
-        child: Column(
+        child:Obx(() => controller.isUploading.value
+            ? Container(height: double.infinity,
+          decoration: BoxDecoration(
+            gradient: gradientColorBg,
+          ),
+          //   height: double.infinity,
+          child: Center(
+            child: CircularProgressIndicator(
+              color: primaryColor,
+            ),
+          ),
+        )
+            : Column(
           children: [
           /*  SizedBox(
               height: defaultPadding,
@@ -73,7 +86,7 @@ class CustomShiftsTable extends StatelessWidget {
                                 columns: [
                                   DataColumn(
                                     label: Text(
-                                      "رقم المناوبة",
+                                      " المناوبة",
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleLarge,
@@ -95,19 +108,12 @@ class CustomShiftsTable extends StatelessWidget {
                                           .titleLarge,
                                     ),
                                   ),
-                                  DataColumn(
-                                    label: Text(
-                                      "مجموع ساعات الدّوام",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
-                                    ),
-                                  ),
+
                                 ],
                                 rows: List.generate(
-                                  shiftsList.length,
+                                controller.shifts.length,
                                   (index) =>
-                                      shiftDataRow(shiftsList[index], context),
+                                      shiftDataRow(controller.shifts[index], context),
                                 ),
                               ),
                             ),
@@ -122,39 +128,34 @@ class CustomShiftsTable extends StatelessWidget {
               ],
             ),
           ],
-        ),
+        )),
       ),
     );
   }
 
-  DataRow shiftDataRow(ShiftModel shiftModel, BuildContext context) {
+  DataRow shiftDataRow(ShiftsModel shiftModel, BuildContext context) {
     return DataRow(
 
       cells: [
         DataCell(
           Text(
-      shiftModel.id ?? "",
+      shiftModel.shiftName ?? "",
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
         DataCell(
           Text(
-          shiftModel.start ?? "",
+          shiftModel.startTime.toString() ?? "",
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
         DataCell(
           Text(
-        shiftModel.end ?? "",
+        shiftModel.endTime.toString() ?? "",
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
-        DataCell(
-          Text(
-        shiftModel.total ?? "",
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-        ),
+
       ],
     );
   }

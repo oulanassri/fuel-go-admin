@@ -7,7 +7,7 @@ import '../constants.dart';
 import '../responsive.dart';
 import 'lorries_managment_controller.dart';
 
-class LorriesManagementScreen extends StatelessWidget {
+class LorriesManagementScreen extends GetView<LorriesManagementController> {
   const LorriesManagementScreen({Key? key}) : super(key: key);
 
   @override
@@ -28,7 +28,7 @@ class LorriesManagementScreen extends StatelessWidget {
                 ),
               Expanded(
                 flex: 5,
-                child: LorriesTable(),
+                child: LorriesTable(controller: controller,),
               ),
             ],
           ),

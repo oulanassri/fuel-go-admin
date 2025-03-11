@@ -102,7 +102,8 @@ class LoginScreen extends GetView<LoginController> {
                             text: "تسجيل دخول",
                             function: () {
                               print("login button");
-                              Get.offNamed(Routes.MAIN_SCREEN);
+                              controller.login();
+
                           //    controller.login();
                             },
                           ),

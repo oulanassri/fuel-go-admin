@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import '../../../enums/order_type.dart';
 import '../../../models/driver_model.dart';
 import '../../../models/order.dart';
 import '../../../models/recent_file.dart';

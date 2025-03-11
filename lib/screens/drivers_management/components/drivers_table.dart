@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../constants.dart';
 import '../../common_components/header.dart';
+import '../drivers_management_controller.dart';
 import 'add_button1.dart';
 import 'custom_drivers_table.dart';
 
 class DriversTable extends StatelessWidget {
-  const DriversTable({Key? key}) : super(key: key);
-
+   DriversTable({Key? key}) : super(key: key);
+  DriversManagementController controller=  Get.put(DriversManagementController());
   @override
   Widget build(BuildContext context) {
 
@@ -35,7 +38,7 @@ class DriversTable extends StatelessWidget {
                       SizedBox(
                         height: defaultPadding,
                       ),
-                      CustomDriversTable(),
+                      CustomDriversTable(controller: controller,),
 
 
                     ],

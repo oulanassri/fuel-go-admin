@@ -3,17 +3,32 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../models/lorry_model.dart';
+import '../../../models/trucks.dart';
 import '../../../routes/app_routes.dart';
 import '../../constants.dart';
+import '../lorries_managment_controller.dart';
 
 class CustomLorriesTable extends StatelessWidget {
-  const CustomLorriesTable({
-    super.key,
+   CustomLorriesTable({
+    super.key,required this.controller
   });
+  LorriesManagementController controller;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Obx(() => controller.isUploading.value
+        ? Container(height: double.infinity,
+      decoration: BoxDecoration(
+        gradient: gradientColorBg,
+      ),
+      //   height: double.infinity,
+      child: Center(
+        child: CircularProgressIndicator(
+          color: primaryColor,
+        ),
+      ),
+    )
+        : Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
         color: bgColor,
@@ -31,29 +46,29 @@ class CustomLorriesTable extends StatelessWidget {
               columns: [
                 DataColumn(
                   label: Text(
-                    "رقم الشّاحنة",
+                    "رقم لوحة الشّاحنة",
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
                 DataColumn(
                   label: Text(
-                    "نوع الوقود",
+                    "نوع وقود الشاحنة",
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
               ],
               rows: List.generate(
-                lorriesList.length,
-                (index) => centerDataRow(lorriesList[index], context),
+               controller.trucks.length,
+                (index) => centerDataRow(controller.trucks[index], context),
               ),
             ),
           ),
         ],
       ),
-    );
+    ));
   }
 
-  DataRow centerDataRow(LorryModel centerModel, BuildContext context) {
+  DataRow centerDataRow(TrucksModel trucksModel, BuildContext context) {
     return DataRow(
       onLongPress: (){
         print("LORRY_DETAILS_SCREEN");
@@ -62,13 +77,13 @@ class CustomLorriesTable extends StatelessWidget {
       cells: [
         DataCell(
           Text(
-            centerModel.id ?? "",
+            trucksModel.plateNumber ?? "",
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
         DataCell(
           Text(
-            centerModel.plateNumber ?? "",
+            trucksModel.cargoTankTypeName ?? "",
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
