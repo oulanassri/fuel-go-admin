@@ -9,12 +9,13 @@ import 'order_details.dart';
 import 'orders_controller.dart';
 
 class UpcomingOrdersScreen extends GetView<OrdersController> {
-  UpcomingOrdersScreen( {Key? key,}) : super(key: key);
-
+  UpcomingOrdersScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.put(OrdersController());
+    Get.put(OrdersController()).getOrdersByCenter();
     return Container(
       decoration: BoxDecoration(gradient: gradientColorBg),
       child: Scaffold(
@@ -30,7 +31,10 @@ class UpcomingOrdersScreen extends GetView<OrdersController> {
                 ),
               Expanded(
                 flex: 5,
-                child:CustomOrdersTable(  title: 'جدول الطلبات القادمة',),//CustomOrdersTable()// OrderDetails(),
+                child: CustomOrdersTable(
+                  title: 'جدول الطلبات القادمة',
+                  controller: controller,
+                ), //CustomOrdersTable()// OrderDetails(),
               ),
             ],
           ),
@@ -38,5 +42,4 @@ class UpcomingOrdersScreen extends GetView<OrdersController> {
       ),
     );
   }
-
 }

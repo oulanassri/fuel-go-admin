@@ -9,7 +9,9 @@ import 'order_details.dart';
 import 'orders_controller.dart';
 
 class CompletedOrdersScreen extends GetView<OrdersController> {
-  CompletedOrdersScreen( {Key? key,}) : super(key: key);
+  CompletedOrdersScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,10 @@ class CompletedOrdersScreen extends GetView<OrdersController> {
                 ),
               Expanded(
                 flex: 5,
-                child:CustomOrdersTable( title: "جدول الطلبات المكتملة",),//CustomOrdersTable()// OrderDetails(),
+                child: CustomOrdersTable(
+                  title: "جدول الطلبات المكتملة",
+                  controller: controller,
+                ), //CustomOrdersTable()// OrderDetails(),
               ),
             ],
           ),
@@ -37,5 +42,4 @@ class CompletedOrdersScreen extends GetView<OrdersController> {
       ),
     );
   }
-
 }

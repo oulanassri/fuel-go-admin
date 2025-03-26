@@ -60,7 +60,7 @@ class CustomChargingWallet extends StatelessWidget {
                                 CustomTextFormField(
                                   hintText: "المبلغ",
                                   controller:
-                                      controller.amountOfMoneyController,
+                                  controller.amountOfMoneyController,
                                 ),
                                 CustomTextFormField(
                                   hintText: "الرمز",
@@ -71,12 +71,11 @@ class CustomChargingWallet extends StatelessWidget {
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                  MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Padding(
                                       padding: EdgeInsets.all(defaultPadding),
                                       child: CustomMaterialButton(
-                                        route: "Routes.MAIN_SCREEN",
                                         text: "إلغاء",
                                         function: () {},
                                       ),
@@ -84,9 +83,10 @@ class CustomChargingWallet extends StatelessWidget {
                                     Padding(
                                       padding: EdgeInsets.all(defaultPadding),
                                       child: CustomMaterialButton(
-                                        route: "Routes.MAIN_SCREEN",
                                         text: "تعبئة",
-                                        function: () {},
+                                        function: () {
+                                          controller.chargeWallet();
+                                        },
                                       ),
                                     )
                                   ],

@@ -52,142 +52,166 @@ class AddingLorryWidget extends StatelessWidget {
                                       blurRadius: 20,
                                       offset: Offset(0, 10))
                                 ]),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                CustomTextFormField(
-                                  hintText: "رقم اللوحة",
-                                  controller: controller.plateNumberController,
-                                ),
+                            child: Obx(() => controller.isLoading.value
+                                ? Center(
+                                    child: CircularProgressIndicator(color: primaryColor,),
+                                  )
+                                : Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      CustomTextFormField(
+                                        hintText: "رقم اللوحة",
+                                        controller:
+                                            controller.plateNumberController,
+                                      ),
 
-                                /* CustomTextFormField(
+                                      /* CustomTextFormField(
                                   hintText: "نوع الوقود",
                                   controller: controller.fuelTypeController,
                                 ),*/
-                                CustomTextFormField(
-                                  hintText: "السّعة الكاملة لتعبئة الشاحنة",
-                                  controller: controller.cargoTankFullCapacityController,
-                                ),
-                                CustomTextFormField(
-                                  hintText: "كمية التعبئة الحاليّة",
-                                  controller: controller.cargoTankCapacityController,
-                                ),
-
-                                CustomTextFormField(
-                                  hintText: "السّعة خزان وقود الشاحنة",
-                                  controller: controller.fuelTankFullCapacityController,
-                                ),
-                                CustomTextFormField(
-                                  hintText: "كمية وقود الشاحنة",
-                                  controller: controller.fuelTankCapacityfuelTypeController,
-                                ),
-
-                                Obx(
-                                  () => Padding(
-                                      padding: const EdgeInsets.all(
-                                          defaultPadding / 2),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "اختر نوع وقود خزان الشاحنة",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleSmall,
-                                          ),
-                                          DropdownButton<String>(
-                                              // updated
-                                              onChanged: (String? newValue) {
-                                                controller.setSelectedFuelType(
-                                                    newValue ?? '');
-                                              },
-                                              value: controller.selectedFuelType
-                                                  .value, //updated
-                                              items: [
-                                                for (var value
-                                                    in controller.fuelTypeList)
-                                                  DropdownMenuItem(
-                                                    value: value,
-                                                    child: Text(
-                                                      value,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyLarge, //updated
-                                                    ),
-                                                  ),
-                                              ]),
-                                        ],
-                                      )),
-                                ),
-                                Obx(
-                                      () => Padding(
-                                      padding: const EdgeInsets.all(
-                                          defaultPadding / 2),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "اختر نوع وقود خزان الشاحنة",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleSmall,
-                                          ),
-                                          DropdownButton<String>(
-                                            // updated
-                                              onChanged: (String? newValue) {
-                                                controller.setSelectedFuelType(
-                                                    newValue ?? '');
-                                              },
-                                              value: controller.selectedFuelType
-                                                  .value, //updated
-                                              items: [
-                                                for (var value
-                                                in controller.fuelTypeList)
-                                                  DropdownMenuItem(
-                                                    value: value,
-                                                    child: Text(
-                                                      value,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyLarge, //updated
-                                                    ),
-                                                  ),
-                                              ]),
-                                        ],
-                                      )),
-                                ),
-                                SizedBox(
-                                  height: 40,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.all(defaultPadding),
-                                      child: CustomMaterialButton(
-                                        route: "Routes.MAIN_SCREEN",
-                                        text: "إلغاء",
-                                        function: () {},
+                                      CustomTextFormField(
+                                        hintText:
+                                            "السّعة الكاملة لتعبئة الشاحنة",
+                                        controller: controller
+                                            .cargoTankFullCapacityController,
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.all(defaultPadding),
-                                      child: CustomMaterialButton(
-                                        route: "Routes.MAIN_SCREEN",
-                                        text: "إضافة",
-                                        function: () {
-                                          controller.addTruck();
-                                        },
+                                      CustomTextFormField(
+                                        hintText: "كمية التعبئة الحاليّة",
+                                        controller: controller
+                                            .cargoTankCapacityController,
                                       ),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
+                                      CustomTextFormField(
+                                        hintText: "السّعة خزان وقود الشاحنة",
+                                        controller: controller
+                                            .fuelTankFullCapacityController,
+                                      ),
+                                      CustomTextFormField(
+                                        hintText: "كمية وقود الشاحنة",
+                                        controller: controller
+                                            .fuelTankCapacityfuelTypeController,
+                                      ),
+                                      Obx(
+                                        () => Padding(
+                                            padding: const EdgeInsets.all(
+                                                defaultPadding / 2),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  " اختر نوع وقود خزان الشاحنة",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleSmall,
+                                                ),
+                                                DropdownButton<String>(
+                                                    // updated
+                                                    onChanged:
+                                                        (String? newValue) {
+                                                      controller
+                                                          .setSelectedCargoTankType(
+                                                              newValue ?? '');
+                                                    },
+                                                    value: controller
+                                                        .selectedCargoTankType
+                                                        .value, //updated
+                                                    items: [
+                                                      for (var value
+                                                          in controller
+                                                              .fuelDetail)
+                                                        DropdownMenuItem(
+                                                          value: value
+                                                              .fuelTypeName,
+                                                          child: Text(
+                                                            value.fuelTypeName ??
+                                                                "",
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyLarge, //updated
+                                                          ),
+                                                        ),
+                                                    ]),
+                                              ],
+                                            )),
+                                      ),
+                                      Obx(
+                                        () => Padding(
+                                            padding: const EdgeInsets.all(
+                                                defaultPadding / 2),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  " اختر نوع وقود خزان الشاحنةالخاص",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleSmall,
+                                                ),
+                                                DropdownButton<String>(
+                                                    // updated
+                                                    onChanged:
+                                                        (String? newValue) {
+                                                      controller
+                                                          .setSelectedFuelTankType(
+                                                              newValue ?? '');
+                                                    },
+                                                    value: controller
+                                                        .selectedFuelTankType
+                                                        .value, //updated
+                                                    items: [
+                                                      for (var value
+                                                          in controller
+                                                              .fuelDetail)
+                                                        DropdownMenuItem(
+                                                          value: value
+                                                                  .fuelTypeName ??
+                                                              "",
+                                                          child: Text(
+                                                            value.fuelTypeName ??
+                                                                "",
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyLarge, //updated
+                                                          ),
+                                                        ),
+                                                    ]),
+                                              ],
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.all(defaultPadding),
+                                            child: CustomMaterialButton(
+                                              text: "إلغاء",
+                                              function: () {},
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.all(defaultPadding),
+                                            child: CustomMaterialButton(
+                                              text: "إضافة",
+                                              function: () {
+                                                controller.addTruck(context);
+                                              },
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  )),
                           )),
                     ],
                   ),

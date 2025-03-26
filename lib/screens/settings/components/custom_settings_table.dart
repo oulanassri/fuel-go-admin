@@ -4,6 +4,7 @@ import 'package:admin_fuel_go/screens/shifts_management/components/add_button.da
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../../models/fuel_details.dart';
 import '../../../models/service.dart';
 import '../../../routes/app_routes.dart';
 import '../../common_components/custom_material_button.dart';
@@ -51,7 +52,6 @@ class CustomSettingsTable extends StatelessWidget {
                       SizedBox(
                         height: defaultPadding,
                       ),
-                      // AddButton(),
                       Container(
                         padding: EdgeInsets.all(defaultPadding),
                         decoration: BoxDecoration(
@@ -60,7 +60,11 @@ class CustomSettingsTable extends StatelessWidget {
                             Radius.circular(10),
                           ),
                         ),
-                        child: Column(
+                        child: Obx(() => controller.isLoading.value
+                            ? Center(
+                          child: CircularProgressIndicator(color: primaryColor,),
+                        )
+                            : Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
@@ -78,7 +82,15 @@ class CustomSettingsTable extends StatelessWidget {
                                   ),
                                   DataColumn(
                                     label: Text(
-                                      "الخدمة",
+                                      "اسم المركز",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      "نوع الوقود",
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleLarge,
@@ -95,14 +107,14 @@ class CustomSettingsTable extends StatelessWidget {
 
                                 ],
                                 rows: List.generate(
-                                  servicesList.length,
-                                  (index) =>
-                                      serviceDataRow(servicesList[index], context),
+                                  controller.fuelDetail.length,
+                                      (index) =>
+                                      serviceDataRow(controller.fuelDetail[index], context),
                                 ),
                               ),
                             ),
                           ],
-                        ),
+                        )),
                       )
                       // CustomLorriesTable(),
                     ],
@@ -117,31 +129,37 @@ class CustomSettingsTable extends StatelessWidget {
     );
   }
 
-  DataRow serviceDataRow(ServiceModel serviceModel, BuildContext context) {
+  DataRow serviceDataRow(FuelDetailsModel fuelDetailsModel, BuildContext context) {
     return DataRow(
       onLongPress: (){
+        controller.fuelTypeIdEdit=fuelDetailsModel.id??0;
         Get.toNamed(Routes.EDIT_SERVICE_SCREEN);
       },
       cells: [
         DataCell(
           Text(
-            serviceModel.id ?? "",
+            fuelDetailsModel.id.toString() ?? "",
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
         DataCell(
           Text(
-            serviceModel.name ?? "",
+            fuelDetailsModel.centerName ?? "",
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
         DataCell(
           Text(
-            serviceModel.price ?? "",
+            fuelDetailsModel.fuelTypeName ?? "",
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
-
+        DataCell(
+          Text(
+            fuelDetailsModel.price.toString() ?? "",
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+        ),
       ],
     );
   }

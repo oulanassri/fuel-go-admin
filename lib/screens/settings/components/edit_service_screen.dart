@@ -62,10 +62,7 @@ class EditServiceScreen extends GetView<SettingsController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
-                              CustomTextFormField(
-                                hintText: "اسم الخدمة",
-                                controller: controller.serviceNameController,
-                              ),
+
                               CustomTextFormField(
                                 hintText: "سعر الخدمة",
                                 controller:
@@ -82,7 +79,6 @@ class EditServiceScreen extends GetView<SettingsController> {
                                   Padding(
                                     padding: EdgeInsets.all(defaultPadding),
                                     child: CustomMaterialButton(
-                                      route: "Routes.MAIN_SCREEN",
                                       text: "إلغاء",
                                       function: () {},
                                     ),
@@ -90,9 +86,8 @@ class EditServiceScreen extends GetView<SettingsController> {
                                   Padding(
                                     padding: EdgeInsets.all(defaultPadding),
                                     child: CustomMaterialButton(
-                                      route: "Routes.MAIN_SCREEN",
                                       text: "تعديل",
-                                      function: () {},
+                                      function: () {controller.editFuelPrice();},
                                     ),
                                   )
                                 ],

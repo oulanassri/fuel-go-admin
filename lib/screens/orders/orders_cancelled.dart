@@ -9,7 +9,9 @@ import 'order_details.dart';
 import 'orders_controller.dart';
 
 class CancelledOrdersScreen extends GetView<OrdersController> {
-  CancelledOrdersScreen( {Key? key,}) : super(key: key);
+  CancelledOrdersScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,10 @@ class CancelledOrdersScreen extends GetView<OrdersController> {
                 ),
               Expanded(
                 flex: 5,
-                child:CustomOrdersTable( title: "جدول الطلبات الملغاة",),//CustomOrdersTable()// OrderDetails(),
+                child: CustomOrdersTable(
+                  title: "جدول الطلبات الملغاة",
+                  controller: controller,
+                ), //CustomOrdersTable()// OrderDetails(),
               ),
             ],
           ),
@@ -37,5 +42,4 @@ class CancelledOrdersScreen extends GetView<OrdersController> {
       ),
     );
   }
-
 }

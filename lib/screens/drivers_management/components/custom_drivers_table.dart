@@ -12,26 +12,14 @@ import '../driver_details_screen.dart';
 import '../drivers_management_controller.dart';
 
 class CustomDriversTable extends StatelessWidget {
-  DriversManagementController controller;
+ 
    CustomDriversTable({
-    super.key,required this.controller
+    super.key,
   });
-
+   DriversManagementController controller=Get.put( DriversManagementController ());
   @override
   Widget build(BuildContext context) {
-    return Obx(() => controller.isUploading.value
-        ? Container(height: double.infinity,
-      decoration: BoxDecoration(
-        gradient: gradientColorBg,
-      ),
-      //   height: double.infinity,
-      child: Center(
-        child: CircularProgressIndicator(
-          color: primaryColor,
-        ),
-      ),
-    )
-        : Container(
+    return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
         color: bgColor,
@@ -39,7 +27,11 @@ class CustomDriversTable extends StatelessWidget {
           Radius.circular(10),
         ),
       ),
-      child: Column(
+      child: Obx(() => controller.isLoading.value
+          ? Center(
+        child: CircularProgressIndicator(color: primaryColor,),
+      )
+          : Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
@@ -72,14 +64,23 @@ class CustomDriversTable extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    ));
+      )),
+    );
   }
 
   DataRow driverDataRow(DriversModel driverModel,BuildContext context) {
     return DataRow(
       onLongPress: (){
-        Get.toNamed(Routes.DRIVER_DETAILS);
+        Get.toNamed(Routes.DRIVER_DETAILS,parameters:   {
+
+        "name":driverModel.name??"",
+        "phone":driverModel.phone??"",
+        "email":driverModel.email??"",
+
+        "isDriving":driverModel.isDriving.toString()??"",
+
+
+        });
       },
       cells: [
         DataCell(

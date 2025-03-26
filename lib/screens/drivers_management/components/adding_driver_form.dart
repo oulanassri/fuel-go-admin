@@ -1,5 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
@@ -12,9 +14,9 @@ import '../drivers_management_controller.dart';
 import 'add_button1.dart';
 
 class AddingDriverForm extends StatelessWidget {
-  const AddingDriverForm({Key? key, required this.controller})
+   AddingDriverForm({Key? key, })
       : super(key: key);
-  final DriversManagementController controller;
+  DriversManagementController controller=Get.put( DriversManagementController ());
 
   @override
   Widget build(BuildContext context) {
@@ -68,14 +70,7 @@ class AddingDriverForm extends StatelessWidget {
                                   hintText: "رقم الهاتف",
                                   controller: controller.phoneController,
                                 ),
-                                CustomTextFormField(
-                                  hintText: "رقم الشاحنة",
-                                  controller: controller.lorryNumberController,
-                                ),
-                                CustomTextFormField(
-                                  hintText: "كلمة السّر",
-                                  controller: controller.passwordController,
-                                ),
+
                                 Obx(
                                   () => Padding(
                                       padding: const EdgeInsets.all(
@@ -86,7 +81,7 @@ class AddingDriverForm extends StatelessWidget {
                                         children: [
                                           Text(
                                             "اختر برنامج الدّوام",
-                                            style:Theme.of(context)
+                                            style: Theme.of(context)
                                                 .textTheme
                                                 .titleSmall,
                                           ),
@@ -100,13 +95,15 @@ class AddingDriverForm extends StatelessWidget {
                                                   .value, //updated
                                               items: [
                                                 for (var value
-                                                    in controller.shiftsList)
+                                                    in controller.shifts)
                                                   DropdownMenuItem(
-                                                    value: value,
+                                                    value: value.shiftName,
                                                     child: Text(
-                                                      value,style:  Theme.of(context)
-                                                        .textTheme
-                                                        .bodyLarge,  //updated
+                                                      value.shiftName
+                                                          .toString(),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyLarge, //updated
                                                     ),
                                                   ),
                                               ]),
@@ -138,12 +135,12 @@ class AddingDriverForm extends StatelessWidget {
                                                   .selectedPlateNumber
                                                   .value, //updated
                                               items: [
-                                                for (var value in controller
-                                                    .plateNumbersList)
+                                                for (var value
+                                                    in controller.trucks)
                                                   DropdownMenuItem(
-                                                    value: value,
+                                                    value: value.plateNumber,
                                                     child: Text(
-                                                      value,
+                                                      value.plateNumber ?? "",
                                                       style: Theme.of(context)
                                                           .textTheme
                                                           .bodyLarge, //updated
@@ -163,15 +160,15 @@ class AddingDriverForm extends StatelessWidget {
                                     Padding(
                                       padding: EdgeInsets.all(defaultPadding),
                                       child: CustomMaterialButton(
-                                        route: "Routes.MAIN_SCREEN",
-                                        text: "إلغاء", function: () {  },
+                                        text: "إلغاء",
+                                        function: () {Get.back();},
                                       ),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.all(defaultPadding),
                                       child: CustomMaterialButton(
-                                        route: "Routes.MAIN_SCREEN",
-                                        text: "إضافة", function: () {  },
+                                        text: "إضافة",
+                                        function: () {controller.addDriver(context);},
                                       ),
                                     ),
                                   ],

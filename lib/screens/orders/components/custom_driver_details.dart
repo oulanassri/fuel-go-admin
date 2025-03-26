@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 
 class CustomDriverDetails extends StatelessWidget {
-  const CustomDriverDetails({Key? key}) : super(key: key);
+  const CustomDriverDetails({Key? key, required this.driverName, required this.driverPhone, required this.driverLorryPlateNumber}) : super(key: key);
+  final String driverName,driverPhone,driverLorryPlateNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -40,16 +41,16 @@ class CustomDriverDetails extends StatelessWidget {
           ),
           RowDetails(
             title: 'اسم السّائق',
-            label: 'الاسم + الكنية',
+            label: driverName,
           ),
           RowDetails(
             title: 'رقم الهاتف',
-            label: '0999223322',
+            label: driverPhone,
           ),
-          RowDetails(
-            title: 'رقم لوحة الشّاحنة',
+         /* RowDetails(
+            title: driverLorryPlateNumber,
             label: '223322',
-          ),
+          ),*/
         ],
       ),
     );

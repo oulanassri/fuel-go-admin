@@ -10,7 +10,6 @@ import 'custom_drivers_table.dart';
 
 class DriversTable extends StatelessWidget {
    DriversTable({Key? key}) : super(key: key);
-  DriversManagementController controller=  Get.put(DriversManagementController());
   @override
   Widget build(BuildContext context) {
 
@@ -38,7 +37,7 @@ class DriversTable extends StatelessWidget {
                       SizedBox(
                         height: defaultPadding,
                       ),
-                      CustomDriversTable(controller: controller,),
+                      CustomDriversTable(),
 
 
                     ],

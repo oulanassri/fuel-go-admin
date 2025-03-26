@@ -20,19 +20,7 @@ class CustomShiftsTable extends StatelessWidget {
     return SafeArea(
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(defaultPadding),
-        child:Obx(() => controller.isUploading.value
-            ? Container(height: double.infinity,
-          decoration: BoxDecoration(
-            gradient: gradientColorBg,
-          ),
-          //   height: double.infinity,
-          child: Center(
-            child: CircularProgressIndicator(
-              color: primaryColor,
-            ),
-          ),
-        )
-            : Column(
+        child:Column(
           children: [
           /*  SizedBox(
               height: defaultPadding,
@@ -76,7 +64,13 @@ class CustomShiftsTable extends StatelessWidget {
                             Radius.circular(10),
                           ),
                         ),
-                        child: Column(
+                        child: Obx(() => controller.isUploading.value
+                            ? Center(
+                          child: CircularProgressIndicator(
+                            color: primaryColor,
+                          ),
+                        )
+                            : Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
@@ -118,7 +112,7 @@ class CustomShiftsTable extends StatelessWidget {
                               ),
                             ),
                           ],
-                        ),
+                        )),
                       )
                       // CustomLorriesTable(),
                     ],
@@ -128,7 +122,7 @@ class CustomShiftsTable extends StatelessWidget {
               ],
             ),
           ],
-        )),
+        ),
       ),
     );
   }

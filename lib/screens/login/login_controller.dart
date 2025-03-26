@@ -14,6 +14,7 @@ class LoginController extends GetxController {
   late UserStorage storage;
   final mobileNumberController = TextEditingController();
   final passwordController = TextEditingController();
+  RxBool isLoading = false.obs;
 
   @override
   void onInit() {
@@ -23,8 +24,9 @@ class LoginController extends GetxController {
 
   Future<void> login() async {
     print("login");
-    try {
-      Map data = {
+    try {      isLoading(true);
+
+    Map data = {
         "password": passwordController.text,
         "phone": mobileNumberController.text,
       };
@@ -48,6 +50,7 @@ class LoginController extends GetxController {
         UserStorage.save("phone", mobileNumberController.text);
         mobileNumberController.clear();
         passwordController.clear();
+        isLoading(false);
 
         Get.offNamed(Routes.MAIN_SCREEN);
       } else {

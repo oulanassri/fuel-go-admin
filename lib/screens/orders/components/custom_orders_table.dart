@@ -5,17 +5,20 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../../../models/driver_model.dart';
 import '../../../models/order.dart';
+import '../../../models/orders.dart';
 import '../../../models/recent_file.dart';
 import '../../../routes/app_pages.dart';
 import '../../../routes/app_routes.dart';
 import '../../common_components/header.dart';
 import '../../constants.dart';
+import '../orders_controller.dart';
 
 class CustomOrdersTable extends StatelessWidget {
    CustomOrdersTable({
-    super.key, required this.title,
+    super.key, required this.title,required this.controller,
   });
 final String title;
+   OrdersController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +55,11 @@ final String title;
                             Radius.circular(10),
                           ),
                         ),
-                        child: Column(
+                        child:Obx(() => controller.isLoading.value
+                            ? Center(
+                          child: CircularProgressIndicator(color: primaryColor,),
+                        )
+                            :  Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
@@ -62,7 +69,15 @@ final String title;
                                 columns: [
                                   DataColumn(
                                     label: Text(
-                                      "رقم الطلب",
+                                      " رقم االطلب",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      "نوع الوقود",
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleLarge,
@@ -76,14 +91,7 @@ final String title;
                                           .titleLarge,
                                     ),
                                   ),
-                                  DataColumn(
-                                    label: Text(
-                                      "اسم السائق",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
-                                    ),
-                                  ),
+
                                   DataColumn(
                                     label: Text(
                                       "التاريخ",
@@ -94,14 +102,14 @@ final String title;
                                   ),
                                 ],
                                 rows: List.generate(
-                                  ordersList.length,
+                                  controller.orders.length,
                                   (index) =>
-                                      orderDataRow(ordersList[index], context),
+                                      orderDataRow( controller.orders[index], context),
                                 ),
                               ),
                             ),
                           ],
-                        ),
+                        ),),
                       )
                       // CustomLorriesTable(),
                     ],
@@ -116,30 +124,54 @@ final String title;
     );
   }
 
-  DataRow orderDataRow(OrderModel orderModel, BuildContext context) {
+  DataRow orderDataRow(OrdersModel orderModel, BuildContext context) {
     return DataRow(
       onLongPress: () {
-        Get.toNamed(Routes.ORDER_DETAILS);
+        Get.toNamed(Routes.ORDER_DETAILS,parameters:   {
+          "date": orderModel.date??"",
+          "orderNumber":orderModel.orderNumber??"",
+          "locationDescription":orderModel.locationDescription??"",
+          "neighborhoodName":orderModel.neighborhoodName??"",
+          "fuelTypeName":orderModel.fuelTypeName??"",
+          "orderedQuantity":orderModel.orderedQuantity.toString()??"",
+          "price":orderModel.price??"",
+          "finalQuantity":orderModel.finalQuantity??"",
+          "finalPrice":orderModel.finalPrice??"",
+          "customerCarBrand":orderModel.customerCarBrand??"",
+          "customerApartmentName":orderModel.customerApartmentName??"",
+          "authCode":orderModel.authCode??"",
+          "driverPhone":orderModel.driverPhone??"",
+          "customerName":orderModel.customerName??"",
+          "customerPhone":orderModel.customerPhone??"",
+          "statusName":orderModel.statusName??"",
+          "driverName":orderModel.driverName??"",
+          "deliveryFee":orderModel.deliveryFee??"",
+
+
+
+
+        });
       },
       cells: [
         DataCell(
           Text(
-            orderModel.id ?? "",
+            orderModel.orderNumber ?? "",
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
         DataCell(
           Text(
-            orderModel.customerName ?? "",
+            orderModel.fuelTypeName ?? "",
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
         DataCell(
           Text(
-            orderModel.driverName ?? "",
+            orderModel.customerApartmentName ?? "",
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
+
         DataCell(
           Text(
             orderModel.date ?? "",

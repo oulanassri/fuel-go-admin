@@ -28,7 +28,6 @@ class NewDriverScreen extends GetView<DriversManagementController> {
               Expanded(
                 flex: 5,
                 child: AddingDriverForm(
-                  controller: controller,
                 ),
               ),
             ],

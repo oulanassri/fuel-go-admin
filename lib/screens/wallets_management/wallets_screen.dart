@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import '../common_components/side_menu.dart';
 import '../constants.dart';
 import '../responsive.dart';
+import 'components/custom_charging_wallet.dart';
 import 'components/wallets_table.dart';
 
 class WalletsScreen extends GetView<WalletsController> {
@@ -27,7 +28,7 @@ class WalletsScreen extends GetView<WalletsController> {
                 ),
               Expanded(
                 flex: 5,
-                child: WalletsTable(),
+                child:CustomChargingWallet(controller: controller,),// WalletsTable(),
               ),
             ],
           ),

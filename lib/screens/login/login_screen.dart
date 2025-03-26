@@ -97,8 +97,25 @@ class LoginScreen extends GetView<LoginController> {
                         ),
                         Padding(
                           padding: EdgeInsets.all(defaultPadding),
-                          child: CustomMaterialButton(
-                            route: Routes.MAIN_SCREEN,
+                          child: Obx(()=>controller.isLoading.value
+                              ? MaterialButton(
+                            onPressed: () {},
+                            height: 50,
+                            // margin: EdgeInsets.symmetric(horizontal: 50),
+                            color: primaryButton,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            // decoration: BoxDecoration(
+                            // ),
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: primaryColor,
+                              ),
+                            ),
+                          )
+                              : CustomMaterialButton(
+
                             text: "تسجيل دخول",
                             function: () {
                               print("login button");
@@ -106,7 +123,7 @@ class LoginScreen extends GetView<LoginController> {
 
                           //    controller.login();
                             },
-                          ),
+                          ),)
                         )
                       ],
                     ),

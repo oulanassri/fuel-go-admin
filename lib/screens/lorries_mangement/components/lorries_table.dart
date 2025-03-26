@@ -33,7 +33,7 @@ class LorriesTable extends StatelessWidget {
                       SizedBox(
                         height: defaultPadding,
                       ),
-                      AddButton(),
+                     AddButton(),
                       SizedBox(
                         height: defaultPadding,
                       ),

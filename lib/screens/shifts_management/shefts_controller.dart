@@ -12,7 +12,7 @@ class ShiftsController extends GetxController {
   static final String token = UserStorage.read('token');
 
   final isUploading = false.obs;
-  late List<ShiftsModel> shifts=[];
+  late List<ShiftsModel> shifts = [];
 
   // final plateNumberController = TextEditingController();
   // final fuelTypeController = TextEditingController();
@@ -47,6 +47,7 @@ class ShiftsController extends GetxController {
 
         for (int i = 0; i < body.length; i++) {
           shifts.add(ShiftsModel(
+              id: body[i]["id"],
               shiftName: body[i]["shiftName"],
               startTime: body[i]["startTime"],
               endTime: body[i]["endTime"]));

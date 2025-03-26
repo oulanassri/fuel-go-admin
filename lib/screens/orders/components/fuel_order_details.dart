@@ -3,7 +3,21 @@ import 'package:flutter/material.dart';
 
 import '../../constants.dart';
 class FuelOrderDetails extends StatelessWidget {
-  const FuelOrderDetails({Key? key}) : super(key: key);
+  const FuelOrderDetails(
+      {Key? key,
+        required this.date,
+        required this.neighborhoodName,
+        required this.locationDescription,
+        required this.fuelTypeName,
+        required this.finalQuantity,
+        required this.finalPrice, required this.orderedQuantity, required this.price})
+      : super(key: key);
+  final String date,
+      neighborhoodName,
+      locationDescription,
+      fuelTypeName,
+      finalQuantity,
+      finalPrice,orderedQuantity,price;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +32,6 @@ class FuelOrderDetails extends StatelessWidget {
         ),
       ),
       child: Column(
-
         children: [
           Container(
             padding: EdgeInsets.all(defaultPadding),
@@ -40,26 +53,27 @@ class FuelOrderDetails extends StatelessWidget {
           ),
           RowDetails(
             title: 'تاريخ الطلب',
-            label: '20/10/2024  12:12 PM',
+            label: date,
           ),
           RowDetails(
             title: 'الموقع',
-            label: 'الحيّ + المدينة + تفاصيل عن الموقع',
+            label: locationDescription,
           ),
           RowDetails(
             title: 'نوع الوقود',
-            label: 'بيزين',
+            label: fuelTypeName,
           ),
           RowDetails(
             title: 'كمية التعبئة',
-            label: '20',
+            label:orderedQuantity.isNotEmpty?orderedQuantity:finalQuantity,
           ),
           RowDetails(
             title: 'الكلفة الإجمالية',
-            label: '20',
+            label:price.isNotEmpty?price: finalPrice,
           ),
         ],
       ),
     );
   }
 }
+

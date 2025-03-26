@@ -1,4 +1,5 @@
 class TrucksModel {
+  int? id;
   String? plateNumber;
   double? lat;
   double? long;
@@ -10,7 +11,8 @@ class TrucksModel {
   String? cargoTankTypeName;
 
   TrucksModel(
-      {this.plateNumber,
+      {this.id,
+        this.plateNumber,
         this.lat,
         this.long,
         this.fuelTankCapacity,
@@ -21,6 +23,7 @@ class TrucksModel {
         this.cargoTankTypeName});
 
   TrucksModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     plateNumber = json['plateNumber'];
     lat = json['lat'];
     long = json['long'];
@@ -34,6 +37,7 @@ class TrucksModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
     data['plateNumber'] = this.plateNumber;
     data['lat'] = this.lat;
     data['long'] = this.long;

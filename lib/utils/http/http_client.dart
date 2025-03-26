@@ -17,7 +17,6 @@ class THttpHelper {
   //Helper method to make a POST request
   static Future<Map<String, dynamic>> post(
       {required String endpoint, required dynamic data}) async {
-    print(token);
     final response = await http.post(Uri.parse('$_baseUrl$endpoint'),
         headers: {
           'Content-Type': 'application/json',
