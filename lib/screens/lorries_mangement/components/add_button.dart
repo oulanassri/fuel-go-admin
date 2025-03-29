@@ -30,7 +30,7 @@ class AddButton extends StatelessWidget {
               ),
               backgroundColor: primaryButton),
           onPressed: () {
-            Get.toNamed(Routes.NEW_LORRY);
+            Get.toNamed(Routes.NEW_LORRY,preventDuplicates: false);
           },
           icon: Icon(
             Icons.add,

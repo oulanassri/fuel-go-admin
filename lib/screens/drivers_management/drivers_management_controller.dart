@@ -33,7 +33,7 @@ class DriversManagementController extends GetxController {
   RxString selectedPlateNumber = "".obs;
   final isLoading = false.obs;
   late List<DriversModel> drivers = [];
-  late List<TrucksModel> trucks = [];
+  late List trucks = [].obs;
   late List<ShiftsModel> shifts = [];
 
   @override
@@ -46,8 +46,10 @@ class DriversManagementController extends GetxController {
 
   @override
   void onReady() {
- //   print("onReady DriversManagementController");
-    super.onInit();
+    getTrucks();
+    getShifts();
+   print("onReady DriversManagementController");
+    super.onReady();
   }
 
   void setSelectedSift(String value) {
@@ -124,7 +126,7 @@ drivers.clear();
         List<dynamic> body = json.decode(response.body);
         print(body);
         print(body.length);
-
+        trucks.clear();
         for (int i = 0; i < body.length; i++) {
           trucks.add(TrucksModel(
             id: body[i]["id"],
@@ -169,7 +171,7 @@ drivers.clear();
         List<dynamic> body = json.decode(response.body);
         print(body);
         print(body.length);
-
+        shifts.clear();
         for (int i = 0; i < body.length; i++) {
           shifts.add(ShiftsModel(
               id: body[i]["id"],

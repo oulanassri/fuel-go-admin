@@ -7,12 +7,15 @@ import '../responsive.dart';
 import 'components/adding_driver_form.dart';
 import 'drivers_management_controller.dart';
 
-class NewDriverScreen extends GetView<DriversManagementController> {
-  const NewDriverScreen({Key? key}) : super(key: key);
+class NewDriverScreen extends StatelessWidget {
+   NewDriverScreen({Key? key}) : super(key: key);
+  DriversManagementController controller=Get.put( DriversManagementController ());
 
   @override
   Widget build(BuildContext context) {
-    Get.put(DriversManagementController());
+    controller.getTrucks();
+
+    Get.put(DriversManagementController()).getTrucks();
     return Container(
       decoration: BoxDecoration(gradient: gradientColorBg),
       child: Scaffold(backgroundColor: Colors.transparent,
@@ -27,7 +30,7 @@ class NewDriverScreen extends GetView<DriversManagementController> {
                 ),
               Expanded(
                 flex: 5,
-                child: AddingDriverForm(
+                child: AddingDriverForm(controller: controller,
                 ),
               ),
             ],
@@ -36,4 +39,5 @@ class NewDriverScreen extends GetView<DriversManagementController> {
       ),
     );
   }
+
 }

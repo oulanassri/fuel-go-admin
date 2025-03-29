@@ -64,7 +64,9 @@ class AppPages {
 
     //Login Screen
     GetPage(
-        name: Paths.LOGIN, page: () => LoginScreen(), binding: LoginBinding()),
+        name: Paths.LOGIN,
+        page: () => LoginScreen(),
+        binding: LoginBinding()),
 
     //Drivers Management
     GetPage(

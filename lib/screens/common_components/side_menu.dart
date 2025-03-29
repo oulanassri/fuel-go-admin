@@ -6,6 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../native_service/get_storage.dart';
 import '../../routes/app_routes.dart';
 import '../constants.dart';
+import '../drivers_management/drivers_management_controller.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
@@ -53,7 +54,11 @@ class SideMenu extends StatelessWidget {
               title: 'إدارة السّائقين',
               svgSrc: 'assets/icons/menu_doc.svg',
               press: () {
-                Get.toNamed(Routes.DRIVERS_MANAGEMENT);
+                DriversManagementController controller = Get.find<DriversManagementController>();
+                controller.getTrucks();
+                controller.getShifts();
+                controller.getDrivers();
+                Get.toNamed(Routes.DRIVERS_MANAGEMENT,preventDuplicates: false);
               },
             ),
             DrawerListTile(

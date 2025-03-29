@@ -7,6 +7,7 @@ class DriversBinding extends Bindings{
   @override
   void dependencies() {
     Get.put(DriversManagementController());
+    DriversManagementController().onReady();
   }
 
 }

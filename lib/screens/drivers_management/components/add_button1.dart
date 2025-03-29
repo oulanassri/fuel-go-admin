@@ -7,6 +7,7 @@ import '../../../models/my_files.dart';
 import '../../../routes/app_routes.dart';
 import '../../constants.dart';
 import '../../responsive.dart';
+import '../drivers_management_controller.dart';
 
 class AddButton1 extends StatelessWidget {
   AddButton1({
@@ -30,7 +31,10 @@ class AddButton1 extends StatelessWidget {
               ),
               backgroundColor: primaryButton),
           onPressed: () {
-            Get.toNamed(Routes.NEW_DRIVER);
+            DriversManagementController controller = Get.find<DriversManagementController>();
+            controller.getTrucks();
+            controller.getShifts();
+            Get.toNamed(Routes.NEW_DRIVER,preventDuplicates: false);
           },
           icon: Icon(
             Icons.add,

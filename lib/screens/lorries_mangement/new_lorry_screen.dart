@@ -12,7 +12,7 @@ class NewLorryScreen extends GetView<LorriesManagementController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(LorriesManagementController());
+    Get.put(LorriesManagementController()).getFuelDetails();
     return Container(
       decoration: BoxDecoration(gradient: gradientColorBg),
       child: Scaffold(backgroundColor: Colors.transparent,

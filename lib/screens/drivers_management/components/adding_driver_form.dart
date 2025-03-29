@@ -14,12 +14,14 @@ import '../drivers_management_controller.dart';
 import 'add_button1.dart';
 
 class AddingDriverForm extends StatelessWidget {
-   AddingDriverForm({Key? key, })
+   AddingDriverForm({Key? key, required this.controller, })
       : super(key: key);
-  DriversManagementController controller=Get.put( DriversManagementController ());
+  final DriversManagementController controller;
 
   @override
   Widget build(BuildContext context) {
+
+
     return SafeArea(
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(defaultPadding),
@@ -72,12 +74,12 @@ class AddingDriverForm extends StatelessWidget {
                                 ),
 
                                 Obx(
-                                  () => Padding(
+                                  () => controller.isLoading.value?CircularProgressIndicator():Padding(
                                       padding: const EdgeInsets.all(
                                           defaultPadding / 2),
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "اختر برنامج الدّوام",
@@ -86,7 +88,7 @@ class AddingDriverForm extends StatelessWidget {
                                                 .titleSmall,
                                           ),
                                           DropdownButton<String>(
-                                              // updated
+                                            // updated
                                               onChanged: (String? newValue) {
                                                 controller.setSelectedSift(
                                                     newValue ?? '');
@@ -95,7 +97,7 @@ class AddingDriverForm extends StatelessWidget {
                                                   .value, //updated
                                               items: [
                                                 for (var value
-                                                    in controller.shifts)
+                                                in controller.shifts)
                                                   DropdownMenuItem(
                                                     value: value.shiftName,
                                                     child: Text(
@@ -111,7 +113,7 @@ class AddingDriverForm extends StatelessWidget {
                                       )),
                                 ),
                                 Obx(
-                                  () => Padding(
+                                  () => controller.isLoading.value?CircularProgressIndicator():Padding(
                                       padding: const EdgeInsets.all(
                                           defaultPadding / 2),
                                       child: Column(
@@ -186,5 +188,7 @@ class AddingDriverForm extends StatelessWidget {
         ),
       ),
     );
+
   }
+
 }

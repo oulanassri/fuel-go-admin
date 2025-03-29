@@ -73,17 +73,17 @@ class AddingLorryWidget extends StatelessWidget {
                                 ),*/
                                       CustomTextFormField(
                                         hintText:
-                                            "السّعة الكاملة لتعبئة الشاحنة",
+                                            "السّعة الكاملة لخزان الشاحنة الخارجي",
                                         controller: controller
                                             .cargoTankFullCapacityController,
                                       ),
                                       CustomTextFormField(
-                                        hintText: "كمية التعبئة الحاليّة",
+                                        hintText: " كمية التعبئة الحاليّة لخزان الشاحنة الخارجي",
                                         controller: controller
                                             .cargoTankCapacityController,
                                       ),
                                       CustomTextFormField(
-                                        hintText: "السّعة خزان وقود الشاحنة",
+                                        hintText: "سعة خزان وقود الشاحنة",
                                         controller: controller
                                             .fuelTankFullCapacityController,
                                       ),
