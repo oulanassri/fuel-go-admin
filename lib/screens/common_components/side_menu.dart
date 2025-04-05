@@ -54,7 +54,7 @@ class SideMenu extends StatelessWidget {
               title: 'إدارة السّائقين',
               svgSrc: 'assets/icons/menu_doc.svg',
               press: () {
-                DriversManagementController controller = Get.find<DriversManagementController>();
+                DriversManagementController controller = Get.put(DriversManagementController());
                 controller.getTrucks();
                 controller.getShifts();
                 controller.getDrivers();

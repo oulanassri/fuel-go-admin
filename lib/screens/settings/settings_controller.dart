@@ -60,7 +60,7 @@ class SettingsController extends GetxController {
             price: body[i]["price"],
           ));
         }
-        // print(fuelDetail[0].name);
+         print(response.statusCode);
       } else {
         throw Exception('Failed to load date: ${response.statusCode}');
       }
@@ -95,6 +95,7 @@ class SettingsController extends GetxController {
         getFuelDetails();
         THelperFunctions.showSnackBar(
             message: 'تم تعديل سعر الوقود', title: 'تعديل سعر الوقود');
+        servicePriceController.clear();
         Get.toNamed(Routes.SETTINGS_SCREEN);
       }
       //getProperties();

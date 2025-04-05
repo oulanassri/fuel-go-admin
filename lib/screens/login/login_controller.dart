@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../../native_service/get_storage.dart';
 import '../../routes/app_routes.dart';
 import '../../utils/constants/api_constants.dart';
+import '../../utils/helpers/helper_functions.dart';
 import '../../utils/http/http_client.dart';
 import 'package:http/http.dart' as http;
 
@@ -54,11 +55,15 @@ class LoginController extends GetxController {
 
         Get.offNamed(Routes.MAIN_SCREEN);
       } else {
+        THelperFunctions.showSnackBar(
+            message: 'كلمة المرور خطأ أو رقم الهاتف غير موجود', title: 'تسجيل الدخول');
         throw Exception('Failed to load date: ${response.statusCode}');
       }
 
     } catch (e) {
       print(e);
+    }finally{
+      isLoading(false);
     }
   }
 }

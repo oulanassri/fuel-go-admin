@@ -9,8 +9,7 @@ import '../../screens/constants.dart';
 class THelperFunctions {
   static void showSnackBar({required String message, required String title}) {
     Get.snackbar(title, message,
-        duration: Duration(seconds: 5),
-        maxWidth: 1500,
+        maxWidth: 700,
         snackPosition: SnackPosition.BOTTOM,
         titleText: Text(
           title,

@@ -26,22 +26,6 @@ class TAppTheme {
     outlinedButtonTheme: TOutlinedButtonTheme.lightOutlinedButtonTheme,
     inputDecorationTheme: TTextFormFieldTheme.lightInputDecorationTheme,
   );
- /* static ThemeData darkTheme = ThemeData(
-    useMaterial3: true,
-    primaryColor: Colors.orange,
-    fontFamily: 'Poppins',
-    scaffoldBackgroundColor: bgColor,
-    brightness: Brightness.dark,
-    textTheme: TTextTheme.darkTextTheme,
-    elevatedButtonTheme: TElevatedButtonTheme.darkElevatedButtonTheme,
-    chipTheme: TChipTheme.darkChipTheme,
-    appBarTheme: TAppBarTheme.darkAppBarTheme,
-    checkboxTheme: TCheckboxTheme.darkCheckboxTheme,
-    bottomSheetTheme: TBottomSheetTheme.darkBottomSheetTheme,
-    outlinedButtonTheme: TOutlinedButtonTheme.darkOutlinedButtonTheme,
-    inputDecorationTheme: TTextFormFieldTheme.darkInputDecorationTheme,
-  );*/
+
 }
-/*scaffoldBackgroundColor: bgColor,
-        textTheme: GoogleFonts.poppinsTextTheme(
-          Theme.of(context).textTheme.apply(bodyColor: Colors.white*/
+

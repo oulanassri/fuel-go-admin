@@ -51,6 +51,10 @@ class LoginScreen extends GetView<LoginController> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
+                        Text(
+                          "Admin Login",
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
                         CustomTextFormField(
                           hintText: "رقم الهاتف",
                           controller: controller.mobileNumberController,

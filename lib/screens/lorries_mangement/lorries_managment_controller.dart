@@ -201,6 +201,8 @@ class LorriesManagementController extends GetxController {
       //Get.back();
       //THelperFunctions.showSnackBar(message: 'تم إضافة السيّارة', title: '');
     } catch (e) {
+      THelperFunctions.showSnackBar(
+          message: "هناك خطأ بملومات الإضافة", title: "إضافة شاحنة");
       print(e);
     }
   }
