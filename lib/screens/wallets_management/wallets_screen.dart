@@ -22,7 +22,7 @@ class WalletsScreen extends GetView<WalletsController> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (Responsive.isDesktop(context))
+              if (Responsive.isDesktop(context)||Responsive.isTablet(context))
                 Expanded(
                   child: SideMenu(),
                 ),

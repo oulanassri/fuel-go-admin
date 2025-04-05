@@ -51,10 +51,14 @@ class WalletsController extends GetxController {
              message: "تم تعبئة النقود بنجاح", title: "تعبئة نقود");
          // return json.decode(response1.body);
        } else {
+         THelperFunctions.showSnackBar(
+             message: 'حدث خطأ ما يُرجى إعادة المحاولة', title: 'تعبئة نقود');
          throw Exception('Failed to load date: ${response1.statusCode}');
        }
 
      } catch (e) {
+       THelperFunctions.showSnackBar(
+           message: 'حدث خطأ ما يُرجى إعادة المحاولة', title: 'تعبئة نقود');
        if (kDebugMode) {
          print(e);
        }

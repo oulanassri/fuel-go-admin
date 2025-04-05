@@ -97,11 +97,16 @@ class SettingsController extends GetxController {
             message: 'تم تعديل سعر الوقود', title: 'تعديل سعر الوقود');
         servicePriceController.clear();
         Get.toNamed(Routes.SETTINGS_SCREEN);
+      }else{
+        THelperFunctions.showSnackBar(
+            message: 'حدث خطأ ما يُرجى إعادة المحاولة', title: 'تعديل سعر الوقود');
       }
       //getProperties();
       //Get.back();
       //THelperFunctions.showSnackBar(message: 'تم إضافة السيّارة', title: '');
     } catch (e) {
+      THelperFunctions.showSnackBar(
+          message: 'حدث خطأ ما يُرجى إعادة المحاولة', title: 'تعديل سعر الوقود');
       print(e);
     }
   }

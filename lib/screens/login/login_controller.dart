@@ -12,14 +12,12 @@ import '../../utils/http/http_client.dart';
 import 'package:http/http.dart' as http;
 
 class LoginController extends GetxController {
-  late UserStorage storage;
   final mobileNumberController = TextEditingController();
   final passwordController = TextEditingController();
   RxBool isLoading = false.obs;
 
   @override
   void onInit() {
-    storage = UserStorage();
     super.onInit();
   }
 
