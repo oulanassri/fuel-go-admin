@@ -5,6 +5,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
+import '../../../utils/helpers/helper_functions.dart';
+import '../../../utils/validators/validation.dart';
 import '../../constants.dart';
 import '../../common_components/header.dart';
 import '../../common_components/custom_material_button.dart';
@@ -170,7 +172,62 @@ class AddingDriverForm extends StatelessWidget {
                                       padding: EdgeInsets.all(defaultPadding),
                                       child: CustomMaterialButton(
                                         text: "إضافة",
-                                        function: () {controller.addDriver(context);},
+                                        function: () {
+                                          if (TValidator.isValidateName(
+                                              controller
+                                                  .nameController
+                                                  .text) &&
+                                              TValidator.isValidatePhoneNumber(
+                                                  controller
+                                                      .phoneController
+                                                      .text) &&
+                                              TValidator.isValidateEmail(
+                                                  controller
+                                                      .emailController
+                                                      .text)) {
+                                            controller.addDriver(context);
+                                          } else {
+                                            String? message1 = "",
+                                                message2 = "",
+                                                message3 = "";
+                                            if (!(TValidator.isValidateName(
+                                                controller.nameController
+                                                    .text))) {
+                                              message1 =
+                                                  TValidator.validateName(
+                                                      controller
+                                                          .nameController
+                                                          .text);
+                                            }
+                                            if (!(TValidator
+                                                .isValidatePhoneNumber(
+                                                controller
+                                                    .phoneController
+                                                    .text))) {
+                                              message2 = TValidator
+                                                  .validatePhoneNumber(
+                                                  controller
+                                                      .phoneController
+                                                      .text);
+                                            }
+                                            if (!(TValidator
+                                                .isValidateEmail(
+                                                controller
+                                                    .emailController
+                                                    .text))) {
+                                              message3 = TValidator
+                                                  .validateEmail(
+                                                  controller
+                                                      .emailController
+                                                      .text);
+                                            }
+
+                                            THelperFunctions.showSnackBar(
+                                                title: "رسالة خطأ",
+                                                message:
+                                                "$message1 , $message2 , $message3 ");
+                                          }
+                                          },
                                       ),
                                     ),
                                   ],

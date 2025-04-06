@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 
+import '../../../utils/helpers/helper_functions.dart';
 import '../../common_components/custom_material_button.dart';
 import '../../common_components/custom_text_form_field.dart';
 import '../../common_components/header.dart';
@@ -25,10 +26,11 @@ class EditServiceScreen extends GetView<SettingsController> {
         backgroundColor: Colors.transparent,
         drawer: SideMenu(),
         body: SafeArea(
-          child: Row(spacing: defaultPadding,
+          child: Row(
+            spacing: defaultPadding,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (Responsive.isDesktop(context)||Responsive.isTablet(context))
+              if (Responsive.isDesktop(context) || Responsive.isTablet(context))
                 Expanded(
                   child: SideMenu(),
                 ),
@@ -62,19 +64,16 @@ class EditServiceScreen extends GetView<SettingsController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
-
                               CustomTextFormField(
                                 hintText: "سعر الخدمة",
-                                controller:
-                                controller.servicePriceController,
+                                controller: controller.servicePriceController,
                               ),
-
                               SizedBox(
                                 height: 40,
                               ),
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.all(defaultPadding),
@@ -87,7 +86,17 @@ class EditServiceScreen extends GetView<SettingsController> {
                                     padding: EdgeInsets.all(defaultPadding),
                                     child: CustomMaterialButton(
                                       text: "تعديل",
-                                      function: () {controller.editFuelPrice();},
+                                      function: () {
+                                        if (controller.servicePriceController
+                                            .text.isEmpty) {
+                                          THelperFunctions.showSnackBar(
+                                              message:
+                                                  'يُرجى إدخال السّعر الجديد',
+                                              title: 'رسالة خطأ');
+                                        } else {
+                                          controller.editFuelPrice();
+                                        }
+                                      },
                                     ),
                                   )
                                 ],

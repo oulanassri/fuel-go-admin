@@ -20,12 +20,12 @@ class CustomEditTextFormField extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
             label: Text(
-              "${hintText}",
+              hintText,
               style: Theme.of(context).textTheme.titleSmall,
             ),
             labelStyle: Theme.of(context).textTheme.labelLarge,
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey),
+            hintStyle: TextStyle(color: Colors.grey,),
             border: InputBorder.none),
       ),
     );
