@@ -32,7 +32,7 @@ class DriversManagementController extends GetxController {
 
   RxString selectedPlateNumber = "".obs;
   final isLoading = false.obs;
-  late List<DriversModel> drivers = [];
+  late List drivers = [].obs;
   late List trucks = [].obs;
   late List<ShiftsModel> shifts = [];
 
@@ -227,7 +227,10 @@ drivers.clear();
         Get.toNamed(Routes.DRIVERS_MANAGEMENT);
         // return json.decode(response1.body);
       } else {
-        //  throw Exception('Failed to load date: ${response1.statusCode}');
+        THelperFunctions.showSnackBar(
+            message: "حدث خطأ ما،يُرجى إعادة المحاولة ", title: "رسالة خطأ");
+        print(response1.body);
+          throw Exception('Failed to load date: ${response1.statusCode}');
       }
     } catch (e) {
       if (kDebugMode) {

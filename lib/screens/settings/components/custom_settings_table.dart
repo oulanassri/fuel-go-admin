@@ -7,7 +7,11 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../models/fuel_details.dart';
 import '../../../models/service.dart';
 import '../../../routes/app_routes.dart';
+import '../../../utils/helpers/helper_functions.dart';
+import '../../../utils/validators/validation.dart';
+import '../../common_components/common_material_button.dart';
 import '../../common_components/custom_material_button.dart';
+import '../../common_components/custom_text_form_field1.dart';
 import '../../common_components/header.dart';
 import '../../constants.dart';
 import '../settings_controller.dart';
@@ -48,7 +52,87 @@ class CustomSettingsTable extends StatelessWidget {
                       Header(
                         title: ' الإعدادات',
                       ),
-
+                      SizedBox(
+                        height: defaultPadding,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 100),
+                        child: Obx(() => controller.isLoading.value
+                            ? MaterialButton(
+                          onPressed: () {},
+                          height: 50,
+                          // margin: EdgeInsets.symmetric(horizontal: 50),
+                          color: primaryButton,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          // decoration: BoxDecoration(
+                          // ),
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: primaryColor,
+                            ),
+                          ),
+                        )
+                            : CommonMaterialButton(
+                          title: 'تغيير كلمة السّر',
+                          function: () {
+                            Get.defaultDialog(
+                                cancelTextColor: secondaryButton,
+                                buttonColor: secondaryButton,
+                                title: "تغيير كلمة السّر",
+                                textConfirm: "تغيير",
+                                textCancel: "إلغاء",
+                                titleStyle:
+                                Theme.of(context).textTheme.labelMedium,
+                                content: Column(
+                                  children: [
+                                    CustomTextFormField1(
+                                      hintText: 'كلمة السّر القديمة',
+                                      controller: controller.oldPassword,
+                                    ),
+                                    CustomTextFormField1(
+                                      hintText: 'كلمة السّر الجديدة',
+                                      controller: controller.newPassword,
+                                    ),
+                                    CustomTextFormField1(
+                                      hintText: 'كلمة السّر الجديدة مرة أخرى',
+                                      controller: controller.renewPassword,
+                                    ),
+                                  ],
+                                ),
+                                onConfirm: () {
+                                  print("confirm");
+                                  if (TValidator.isValidatePassword(
+                                      controller.newPassword.text) &&
+                                      (controller.newPassword.text ==
+                                          controller.renewPassword.text)) {
+                                    controller.editPassword();
+                                  } else {
+                                    String? message1 = "", message2 = "";
+                                    if (!(TValidator.isValidatePassword(
+                                        controller.newPassword.text))) {
+                                      message1 = TValidator.validatePassword(
+                                          controller.newPassword.text);
+                                    }
+                                    if (controller.newPassword.text !=
+                                        controller.renewPassword.text) {
+                                      message2 = "كلمتا السّر غير متطابقتان";
+                                    }
+                                    THelperFunctions.showSnackBar(
+                                        title: "رسالة خطأ",
+                                        message: "$message1 , $message2 ");
+                                  }
+                                },
+                                onCancel: () {
+                                  print("cancel");
+                                });
+                          },
+                        )),
+                      ), SizedBox(
+                        height: defaultPadding,
+                      ),
                       SizedBox(
                         height: defaultPadding,
                       ),

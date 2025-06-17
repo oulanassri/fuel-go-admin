@@ -21,7 +21,9 @@ class SettingsController extends GetxController {
   List<FuelDetailsModel> fuelDetail = [];
   late int fuelTypeIdEdit;
   final servicePriceController = TextEditingController();
-
+  TextEditingController oldPassword = TextEditingController();
+  TextEditingController newPassword = TextEditingController();
+  TextEditingController renewPassword = TextEditingController();
   // RxString selectedFuelType = "gas".obs;
   // final fuelTypeList=['gas', 'gas1', 'gas2','gas3', ];
   TimeOfDay time = TimeOfDay(hour: 7, minute: 30);
@@ -70,7 +72,48 @@ class SettingsController extends GetxController {
       isLoading(false);
     }
   }
+  Future<void> editPassword() async {
+    Get.back();
 
+    print("editPassword");
+    try {isLoading(true);
+    Map data ={
+      "oldPassword": oldPassword.text,
+      "password": newPassword.text,
+      "rePassword":  renewPassword.text
+    };
+    print(data);
+
+
+    final response = await http.put(Uri.parse('${APIConstants.baseUrl}${APIConstants.endPoints.editPassword}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token'
+        },
+        body: json.encode(data));
+    print("response statusCode  ${response.statusCode}");
+    print("response body  ${response.body}");
+    if (response.statusCode == 200 ) {
+      THelperFunctions.showSnackBar(
+          message: 'تم تغيير كلمة السّر بنجاح', title: 'تغيير كلمة السّر');
+      oldPassword.clear();
+      newPassword.clear();
+      renewPassword.clear();
+
+    } else {
+      THelperFunctions.showSnackBar(
+          message: response.body, title: 'تغيير كلمة السّر');
+      throw Exception('Failed to load date: ${response.statusCode}');
+    }
+
+
+
+    } catch (e) {
+      print(e);
+    }finally{
+      isLoading(false);
+    }
+  }
   Future<void> editFuelPrice() async {
     print("editFuelPrice");
     try {
