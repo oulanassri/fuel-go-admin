@@ -25,15 +25,21 @@ class SideMenu extends StatelessWidget {
             DrawerHeader(
               child: Image.asset("assets/images/logo.png"),
             ),
-            DrawerMultiListTile(
+           /* DrawerMultiListTile(
               title: 'إدارة الطلبات',
               svgSrc: 'assets/icons/menu_tran.svg',
-            ),
+            ),*/
             DrawerListTile(
               title: 'لوحة التّحكم',
               svgSrc: 'assets/icons/menu_dashboard.svg',
               press: () {
                 Get.toNamed(Routes.MAIN_SCREEN);
+              },
+            ), DrawerListTile(
+              title: 'إدارة الطلبات',
+              svgSrc: 'assets/icons/menu_dashboard.svg',
+              press: () {
+                Get.toNamed(Routes.ORDERS_UPCOMING_SCREEN);
               },
             ),
             DrawerListTile(

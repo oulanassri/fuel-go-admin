@@ -167,7 +167,7 @@ final String title;
         ),
         DataCell(
           Text(
-            orderModel.customerApartmentName ?? "",
+            orderModel.customerName ?? "",
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
