@@ -36,6 +36,19 @@ class OrdersController extends GetxController {
   //
   //   update();
   // }
+  List orderStatusList = [
+    "تم التسليم",
+    "قيد الانتظار",
+    "مقبول",
+    "في الطريق",
+    "وصل للموقع",
+    "بدء تعبئة الطلب",
+
+  ].obs;
+  RxString selectedOrderStatus = "تم التسليم".obs;
+  void setSelectedOrderStatusCenter(String value) {
+    selectedOrderStatus.value = value;
+getOrdersByCenter();  }
   Future<void> getOrdersByCenter() async {
     print("getOrdersByCenter");
     try {
@@ -55,8 +68,12 @@ class OrdersController extends GetxController {
 
         List<dynamic> body = json.decode(response.body);
         orders.clear();
+        print(body);
         for (int i = 0; i < body.length; i++) {
-          orders.add(
+          print("********************");
+          print(body[i]["statusName"].toString());
+          if(body[i]["statusName"].toString()==selectedOrderStatus.value) {
+            orders.add(
             OrdersModel(
               date: body[i]["date"].toString(),
               orderNumber: body[i]["orderNumber"].toString(),
@@ -78,6 +95,7 @@ class OrdersController extends GetxController {
               deliveryFee: body[i]["deliveryFee"].toString(),
             ),
           );
+          }
         }
       } else {
         throw Exception('Failed to load date: ${response.statusCode}');

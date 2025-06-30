@@ -21,7 +21,7 @@ abstract class Routes{
   static const ORDER_DETAILS=Paths.ORDER_DETAILS;
 
   static const SHIFTS_SCREEN=Paths.SHIFTS_SCREEN;
-  static const WALLETS_SCREEN=Paths.WALLETS_SCREEN;
+
   static const WALLET_CHARGING_SCREEN=Paths.WALLET_CHARGING_SCREEN;
   static const SETTINGS_SCREEN=Paths.SETTINGS_SCREEN;
   static const EDIT_SERVICE_SCREEN=Paths.EDIT_SERVICE_SCREEN;
@@ -50,7 +50,6 @@ abstract class Paths{
   static const ORDER_DETAILS='/order_details_screen';
 
   static const SHIFTS_SCREEN='/shifts_screen';
-  static const WALLETS_SCREEN='/wallets_screen';
   static const WALLET_CHARGING_SCREEN='/wallet_charging_screen';
 
   static const SETTINGS_SCREEN='/settings_screen';

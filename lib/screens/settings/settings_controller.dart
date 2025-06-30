@@ -53,7 +53,7 @@ class SettingsController extends GetxController {
           });
       if (response.statusCode == 200 || response.statusCode == 201) {
         List<dynamic> body = json.decode(response.body);
-
+        print(body);
         for (int i = 0; i < body.length; i++) {
           fuelDetail.add(FuelDetailsModel(
             id: body[i]["id"],

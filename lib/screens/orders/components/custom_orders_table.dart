@@ -47,6 +47,41 @@ final String title;
                         height: defaultPadding,
                       ),
                       // AddButton(),
+                      Obx(
+                            () => Column(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "اختر  حالة الطّلب",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall,
+                            ),
+                            DropdownButton<String>(
+                              // updated
+                                onChanged: (String? newValue) {
+                                  controller.setSelectedOrderStatusCenter(
+                                      newValue ?? '');
+                                },
+                                value: controller.selectedOrderStatus.value,
+                                onTap: () {}, //updated
+                                items: [
+                                  for (String value
+                                  in controller.orderStatusList)
+                                    DropdownMenuItem(
+                                      value: value,
+                                      child: Text(
+                                        value ?? "",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge, //updated
+                                      ),
+                                    ),
+                                ]),
+                          ],
+                        ),
+                      ),
                       Container(
                         padding: EdgeInsets.all(defaultPadding),
                         decoration: BoxDecoration(
