@@ -56,7 +56,7 @@ class LorriesManagementController extends GetxController {
     for (int i = 0; i < fuelDetail.length; i++) {
       if (fuelDetail[i].fuelTypeName == value) {
 
-        fuelTankTypeId = fuelDetail[i].id!;
+        fuelTankTypeId = fuelDetail[i].fuelTypeId!;
 
       }
     }print("fuelTankTypeId $fuelTankTypeId");
@@ -66,7 +66,7 @@ class LorriesManagementController extends GetxController {
     for (int i = 0; i < fuelDetail.length; i++) {
       if (fuelDetail[i].fuelTypeName == value) {
 
-        cargoTankTypeId = fuelDetail[i].id!;
+        cargoTankTypeId = fuelDetail[i].fuelTypeId!;
 
       }
     }print("cargoTankTypeId $cargoTankTypeId");
@@ -77,7 +77,7 @@ class LorriesManagementController extends GetxController {
    //   isLoading(true);
       final response = await http.get(
           Uri.parse(
-              '${APIConstants.baseUrl}${APIConstants.endPoints.getFuelDetails}'),
+              '${APIConstants.baseUrl}${APIConstants.endPoints.getFuelDetailsBbyCenter}'),
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer $token'
@@ -88,7 +88,7 @@ class LorriesManagementController extends GetxController {
         fuelDetail.clear();
         for (int i = 0; i < body.length; i++) {
           fuelDetail.add(FuelDetailsModel(
-            id: body[i]["id"],
+            fuelTypeId: body[i]["fuelTypeId"],
             fuelTypeName: body[i]["fuelTypeName"],
             centerName: body[i]["centerName"],
             price: body[i]["price"],
@@ -96,13 +96,13 @@ class LorriesManagementController extends GetxController {
         }print(body);
         selectedFuelTankType.value=fuelDetail[0].fuelTypeName??"";
             selectedCargoTankType.value=fuelDetail[0].fuelTypeName??"";
-            fuelTankTypeId=fuelDetail[0].id!;
-        cargoTankTypeId=fuelDetail[0].id!;
+            fuelTankTypeId=fuelDetail[0].fuelTypeId!;
+        cargoTankTypeId=fuelDetail[0].fuelTypeId!;
         print("fuelDetail length ${fuelDetail.length}");
         print(fuelDetail[0].fuelTypeName);
-        print(fuelDetail[0].id);
+        print(fuelDetail[0].fuelTypeId);
         print(fuelDetail[1].fuelTypeName);
-        print(fuelDetail[1].id);
+        print(fuelDetail[1].fuelTypeId);
       } else {
         throw Exception('Failed to load date: ${response.statusCode}');
       }

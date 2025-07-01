@@ -20,7 +20,7 @@ class SettingsController extends GetxController {
   var isLoading = false.obs;
   List<FuelDetailsModel> fuelDetail = [];
   late int fuelTypeIdEdit;
-  final servicePriceController = TextEditingController();
+  TextEditingController servicePriceController = TextEditingController();
   TextEditingController oldPassword = TextEditingController();
   TextEditingController newPassword = TextEditingController();
   TextEditingController renewPassword = TextEditingController();
@@ -46,17 +46,20 @@ class SettingsController extends GetxController {
       isLoading(true);
       final response = await http.get(
           Uri.parse(
-              '${APIConstants.baseUrl}${APIConstants.endPoints.getFuelDetails}'),
+              '${APIConstants.baseUrl}${APIConstants.endPoints.getFuelDetailsBbyCenter}'),
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer $token'
           });
+      print(response.statusCode);
+      print(response.body);
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         List<dynamic> body = json.decode(response.body);
         print(body);
         for (int i = 0; i < body.length; i++) {
           fuelDetail.add(FuelDetailsModel(
-            id: body[i]["id"],
+            fuelTypeId: body[i]["fuelTypeId"],
             fuelTypeName: body[i]["fuelTypeName"],
             centerName: body[i]["centerName"],
             price: body[i]["price"],
@@ -122,6 +125,7 @@ class SettingsController extends GetxController {
         "price": int.parse(servicePriceController.text)
       };
       print(data);
+      print(data);
       final response = await http.post(
           Uri.parse(
               '${APIConstants.baseUrl}${APIConstants.endPoints.editFuelPrice}'),
@@ -139,6 +143,7 @@ class SettingsController extends GetxController {
         THelperFunctions.showSnackBar(
             message: 'تم تعديل سعر الوقود', title: 'تعديل سعر الوقود');
         servicePriceController.clear();
+
         Get.toNamed(Routes.SETTINGS_SCREEN);
       }else{
         THelperFunctions.showSnackBar(

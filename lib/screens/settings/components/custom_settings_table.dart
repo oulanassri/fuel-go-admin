@@ -216,13 +216,13 @@ class CustomSettingsTable extends StatelessWidget {
   DataRow serviceDataRow(FuelDetailsModel fuelDetailsModel, BuildContext context) {
     return DataRow(
       onLongPress: (){
-        controller.fuelTypeIdEdit=fuelDetailsModel.id??0;
+        controller.fuelTypeIdEdit=fuelDetailsModel.fuelTypeId??0;
         Get.toNamed(Routes.EDIT_SERVICE_SCREEN);
       },
       cells: [
         DataCell(
           Text(
-            fuelDetailsModel.id.toString() ?? "",
+            fuelDetailsModel.fuelTypeId.toString() ?? "",
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),

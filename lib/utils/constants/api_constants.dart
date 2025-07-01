@@ -21,6 +21,6 @@ class _EndPoints{
   //Wallet
   final String chargeWallet="/api/Wallet/charge-wallet";//?
 
-  final String getFuelDetails = "/api/FuelDetails/get-fuel-details";//GET True
+  final String getFuelDetailsBbyCenter = "/api/FuelDetails/get-fuel-details-by-center";//GET True
 
 }

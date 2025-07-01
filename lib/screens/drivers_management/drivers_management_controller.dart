@@ -28,7 +28,7 @@ class DriversManagementController extends GetxController {
 
   RxString selectedShift = "".obs;
   late RxInt selectedShiftId = 1.obs;
-  late RxInt selectedPlateNumberId = 1.obs;
+  late RxInt selectedPlateNumberId = 0.obs;
 
   RxString selectedPlateNumber = "".obs;
   final isLoading = false.obs;
@@ -141,6 +141,7 @@ drivers.clear();
             cargoTankTypeName: body[i]["cargoTankTypeName"],
           ));
         }
+        selectedPlateNumberId.value=trucks[0].id;
         selectedPlateNumber.value = trucks[0].plateNumber!;
         print(trucks.length);
       } else {
@@ -180,6 +181,7 @@ drivers.clear();
               endTime: body[i]["endTime"]));
         }
         selectedShift.value = shifts[0].shiftName!;
+        selectedShiftId.value=shifts[0].id!;
         print(shifts.length);
       } else {
         throw Exception('Failed to load date: ${response.statusCode}');
@@ -211,7 +213,8 @@ drivers.clear();
           body: json.encode(data));
 
 
-
+      print("response.statusCode ${response1.statusCode}");
+      print("response.statusCode ${response1.body}");
       if (response1.statusCode == 201 || response1.statusCode == 200) {
         print("response.statusCode ${response1.statusCode}");
         emailController.clear();
