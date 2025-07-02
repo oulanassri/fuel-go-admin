@@ -10,6 +10,7 @@ import '../getx_bindings/main_binding.dart';
 import '../getx_bindings/orders_binding.dart';
 import '../getx_bindings/settings_binding.dart';
 import '../getx_bindings/shifts_binding.dart';
+import '../getx_bindings/wallet_binding.dart';
 import '../screens/dashboard/dashboard_screen.dart';
 import '../screens/drivers_management/components/driver_details.dart';
 import '../screens/drivers_management/drivers_management_screen.dart';
@@ -26,6 +27,8 @@ import '../screens/orders/orders_inprogress.dart';
 import '../screens/settings/components/edit_service_screen.dart';
 import '../screens/settings/settings_screen.dart';
 import '../screens/shifts_management/shifts_screen.dart';
+import '../screens/wallets_management/wallet_charging_screen.dart';
+import '../screens/wallets_management/wallets_screen.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -110,7 +113,16 @@ class AppPages {
         name: Paths.SHIFTS_SCREEN,
         page: () => ShiftsScreen(),
         binding: ShiftsBinding()),
-
+//Wallets Screen
+    GetPage(
+        name: Paths.WALLETS_SCREEN,
+        page: () => WalletsScreen(),
+        binding: WalletsBinding()),
+    //Wallet Charging Screen
+    GetPage(
+        name: Paths.WALLET_CHARGING_SCREEN,
+        page: () => WalletsChargingScreen(),
+        binding: WalletsBinding()),
     //Settings Screen
     GetPage(
         name: Paths.SETTINGS_SCREEN,

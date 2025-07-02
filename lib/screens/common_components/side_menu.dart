@@ -49,7 +49,13 @@ class SideMenu extends StatelessWidget {
                 Get.toNamed(Routes.SHIFTS_SCREEN);
               },
             ),
-
+            DrawerListTile(
+              title: 'إدارة المحفظات',
+              svgSrc: 'assets/icons/menu_task.svg',
+              press: () {
+                Get.toNamed(Routes.WALLETS_SCREEN);
+              },
+            ),
             DrawerListTile(
               title: 'إدارة السّائقين',
               svgSrc: 'assets/icons/menu_doc.svg',

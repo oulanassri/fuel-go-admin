@@ -21,11 +21,10 @@ abstract class Routes{
   static const ORDER_DETAILS=Paths.ORDER_DETAILS;
 
   static const SHIFTS_SCREEN=Paths.SHIFTS_SCREEN;
-
+  static const WALLETS_SCREEN=Paths.WALLETS_SCREEN;
   static const WALLET_CHARGING_SCREEN=Paths.WALLET_CHARGING_SCREEN;
   static const SETTINGS_SCREEN=Paths.SETTINGS_SCREEN;
   static const EDIT_SERVICE_SCREEN=Paths.EDIT_SERVICE_SCREEN;
-
 }
 
 abstract class Paths{
@@ -42,6 +41,8 @@ abstract class Paths{
   static const NEW_DRIVER='/new_driver_screen';
   static const DRIVER_DETAILS_SCREEN='/driver_details_screen';
 
+  static const WALLETS_SCREEN='/wallets_screen';
+  static const WALLET_CHARGING_SCREEN='/wallet_charging_screen';
   static const ORDERS_UPCOMING_SCREEN='/orders_upcoming';
   static const ORDERS_INPROGRESS_SCREEN='/orders_inprogress';
   static const ORDERS_COMPLETED_SCREEN='/orders_completed';
@@ -50,7 +51,6 @@ abstract class Paths{
   static const ORDER_DETAILS='/order_details_screen';
 
   static const SHIFTS_SCREEN='/shifts_screen';
-  static const WALLET_CHARGING_SCREEN='/wallet_charging_screen';
 
   static const SETTINGS_SCREEN='/settings_screen';
   static const EDIT_SERVICE_SCREEN='/edit_service_screen';
